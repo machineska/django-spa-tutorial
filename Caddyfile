@@ -6,7 +6,7 @@ http://hello.localhost {
       not path /static/* /media/*
     }
 
-    reverse_proxy @notStatic django:8000
+    reverse_proxy django:8000
 
     file_server
 }
