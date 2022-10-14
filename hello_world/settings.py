@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app.simple_app',
 ]
 
 MIDDLEWARE = [
@@ -152,5 +153,4 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Async app
 ASGI_APPLICATION = "hello_world.asgi.application"
