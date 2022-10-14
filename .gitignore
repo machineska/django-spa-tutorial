@@ -52,6 +52,7 @@ coverage.xml
 
 # Django stuff:
 staticfiles/
+static/
 
 # Sphinx documentation
 docs/_build/
@@ -330,3 +331,7 @@ diwhatsapp/media/
 .env
 .envs/*
 !.envs/.local/
+
+
+# database
+postgres_data/
