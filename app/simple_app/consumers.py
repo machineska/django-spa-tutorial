@@ -6,6 +6,7 @@ import threading
 from random import randint
 from channels.generic.websocket import JsonWebsocketConsumer
 
+
 class EchoConsumer(WebsocketConsumer):
 
     def connect(self):
@@ -47,6 +48,21 @@ class BingoConsumer(JsonWebsocketConsumer):
             'ticket': random_numbers
         }
         self.send_json(content=message)
+
+        ## Send balls
+        def send_ball(self):
+            while True:
+                # Send message to client
+                random_ball = randint(1, 10)
+                message = {
+                    'action': 'New ball',
+                    'ball': random_ball
+                }
+                self.send_json(content=message)
+                # Sleep for 1 second
+                time.sleep(1)
+
+        threading.Thread(target=send_ball, args=(self,)).start()
 
     def disconnect(self, close_code):
         """Event when client disconnects"""
