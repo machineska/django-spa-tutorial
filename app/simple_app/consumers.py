@@ -3,7 +3,8 @@ from channels.generic.websocket import WebsocketConsumer
 from datetime import datetime
 import time
 import threading
-
+from random import randint
+from channels.generic.websocket import JsonWebsocketConsumer
 
 class EchoConsumer(WebsocketConsumer):
 
@@ -17,7 +18,7 @@ class EchoConsumer(WebsocketConsumer):
         self.send(text_data="You are connected by WebSockets!")
 
         # Send message to client every second
-        def send_time(self, ):
+        def send_time(self):
             while True:
                 # Send message to client
                 self.send(text_data=str(datetime.now().strftime("%H:%M:%S")))
@@ -30,5 +31,27 @@ class EchoConsumer(WebsocketConsumer):
         pass
 
     def receive(self, text_data):
+        """Event when data is received"""
+        pass
+
+
+class BingoConsumer(JsonWebsocketConsumer):
+
+    def connect(self):
+        self.accept()
+        ## Send numbers to client
+        # Generates numbers 5 random numbers, approximately, between 1 and 10
+        random_numbers = list(set([randint(1, 10) for _ in range(5)]))
+        message = {
+            'action': 'New ticket',
+            'ticket': random_numbers
+        }
+        self.send_json(content=message)
+
+    def disconnect(self, close_code):
+        """Event when client disconnects"""
+        pass
+
+    def receive_json(self, data):
         """Event when data is received"""
         pass
