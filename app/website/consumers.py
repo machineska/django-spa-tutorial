@@ -14,6 +14,7 @@ class SocialNetworkConsumer(JsonWebsocketConsumer):
         self.accept()
         # Assign the Broadcast group
         async_to_sync(self.channel_layer.group_add)(self.room_name, self.channel_name)
+        # Send you all the messages stored in the database.
 
     def disconnect(self, close_code):
         """Event when client disconnects"""
